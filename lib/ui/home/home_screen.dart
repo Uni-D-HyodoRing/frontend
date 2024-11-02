@@ -5,17 +5,8 @@ import 'package:frontend/ui/common/components/posting_card.dart';
 import 'package:frontend/ui/home/component/home_card.dart';
 import 'package:frontend/ui/home/component/score_ring.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final fstPageController = PageController();
-  final sndPageController = PageController();
-  final thdPageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.backgroundColor,
       body: const Padding(
         padding: EdgeInsets.all(16.0),
-        child: Parent(),
+        child: Child(),
       ),
     );
   }
@@ -113,15 +104,8 @@ class Parent extends StatelessWidget {
 }
 
 class Child extends StatelessWidget {
-  final PageController fstPageController;
-  final PageController sndPageController;
-  final PageController thdPageController;
-
   const Child({
     super.key,
-    required this.fstPageController,
-    required this.sndPageController,
-    required this.thdPageController,
   });
 
   @override
@@ -143,7 +127,6 @@ class Child extends StatelessWidget {
             height: 150,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              controller: fstPageController,
               itemCount: 10,
               itemBuilder: (context, index) {
                 return HomeCard(
@@ -160,7 +143,6 @@ class Child extends StatelessWidget {
             height: 150,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              controller: fstPageController,
               itemCount: 10,
               itemBuilder: (context, index) {
                 return HomeCard(
@@ -177,7 +159,6 @@ class Child extends StatelessWidget {
             height: 150,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              controller: fstPageController,
               itemCount: 10,
               itemBuilder: (context, index) {
                 return HomeCard(
