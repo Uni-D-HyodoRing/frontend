@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/provider/user_provider.dart';
 import 'package:frontend/ui/register/splash_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Pretendard",
       ),
-      home: const MyHomePage(),
+      home: const NavBar(),
     );
   }
 }

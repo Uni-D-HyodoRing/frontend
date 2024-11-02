@@ -9,4 +9,7 @@ abstract class AppColors {
   static Color textColor = const Color(0xff141414);
   static Color secondaryColor = const Color(0xff585757);
   static Color greyColor = const Color(0xff6B7280);
+  static Color strokeColor = const Color(0xffE5E7EB);
+  static Color darkGrey = const Color(0xff999999);
+  static Color lightGrey = const Color(0xffE5E7EB);
 }
