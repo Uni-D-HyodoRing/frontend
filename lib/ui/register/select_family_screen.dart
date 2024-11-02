@@ -3,6 +3,7 @@ import 'package:frontend/const/app_color.dart';
 import 'package:frontend/const/text_styles.dart';
 import 'package:frontend/ui/register/select_profile_screen.dart';
 import 'package:frontend/ui/contents/contents_screen.dart';
+import 'package:frontend/ui/nav_bar.dart';
 
 class SelectFamilyScreen extends StatefulWidget {
   const SelectFamilyScreen({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class _SelectFamilyScreenState extends State<SelectFamilyScreen> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ContentsScreen(),
+                  builder: (context) => NavBar(),
                 ),
               );
             },

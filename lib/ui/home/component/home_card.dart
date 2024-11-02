@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/const/app_color.dart';
+import 'package:frontend/ui/safety/safety_screen.dart';
 
 class HomeCard extends StatelessWidget {
   final String from;
@@ -96,7 +97,13 @@ class HomeCard extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SafetyScreen(),
+                  ),
+                );
+              },
               style: TextButton.styleFrom(
                 backgroundColor: const Color(0xff333333),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

@@ -26,16 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Pretendard",
       ),
-      home: const NavBar(),
+      home: SplashScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen();
-  }
-}
