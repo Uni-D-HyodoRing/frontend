@@ -4,6 +4,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:frontend/const/app_color.dart';
 import 'package:frontend/const/text_styles.dart';
 import 'package:frontend/ui/register/select_family_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend/provider/register_provider.dart';
 
 
 class SurveyResultScreen extends StatelessWidget {
@@ -22,6 +24,23 @@ class SurveyResultScreen extends StatelessWidget {
       return '부모님과의 관계에 조금 더 관심을 가지는 것이 좋습니다. 작은 관심이 큰 변화를 만들 수 있습니다.';
     } else {
       return '부모님과의 관계에 큰 노력이 필요합니다. 부모님께서도 자녀의 관심을 원하고 계실 수 있으니 대화와 만남의 시간을 늘려 보세요.';
+    }
+  }
+
+  Future<void> _register(BuildContext context) async {
+    final registerProvider = context.read<RegisterProvider>();
+    final success = await registerProvider.register();
+    
+    if (success) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => SelectFamilyScreen(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('회원가입에 실패했습니다. 다시 시도해주세요.')),
+      );
     }
   }
 
@@ -51,13 +70,7 @@ class SurveyResultScreen extends StatelessWidget {
               ),),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => SelectFamilyScreen(),
-                    ),
-                  );
-                },
+                onPressed: () => _register(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor,
                   shape: RoundedRectangleBorder(

@@ -3,12 +3,14 @@ import 'package:frontend/ui/nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/provider/user_provider.dart';
 import 'package:frontend/ui/register/splash_screen.dart';
+import 'package:frontend/provider/register_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => RegisterProvider()),
       ],
       child: const MyApp(),
     ),
