@@ -5,17 +5,20 @@ class PostingTextField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final String hintText;
   final bool isPosting;
+  final TextEditingController? controller;
 
   const PostingTextField({
     super.key,
     required this.onChanged,
     required this.hintText,
     this.isPosting = false,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       style: isPosting ? contentTextStyle : commentTextStyle,
       onChanged: onChanged,
       cursorColor: Colors.black,

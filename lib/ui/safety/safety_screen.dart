@@ -22,12 +22,22 @@ class _SafetyScreenState extends State<SafetyScreen> {
   late ImagePicker fstImagePicker;
   late ImagePicker sndImagePicker;
 
+  late TextEditingController controller;
+
   @override
   void initState() {
     super.initState();
 
     fstImagePicker = ImagePicker();
     sndImagePicker = ImagePicker();
+
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,7 +56,51 @@ class _SafetyScreenState extends State<SafetyScreen> {
                 name: "김만두",
                 date: "2024.11.02",
                 button: TextButton(
-                  onPressed: () {},
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      insetPadding: const EdgeInsets.all(20.0),
+                      backgroundColor: Colors.white,
+                      title: Text(
+                        "전송 완료!",
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      content: const Text("나의 안부가 잘 전달되었어요", style: TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16.0,
+                      ),),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            setState(() {
+                              fstImage = null;
+                              scdImage = null;
+                              controller.clear();
+                            });
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                                AppColors.primaryColor.withOpacity(0.2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 4.0,
+                            ),
+                            minimumSize: Size.zero,
+                          ),
+                          child: Text(
+                            "닫기",
+                            style: TextStyle(color: AppColors.primaryColor, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   style: TextButton.styleFrom(
                     backgroundColor: AppColors.primaryColor.withOpacity(0.2),
                     padding: const EdgeInsets.symmetric(
@@ -66,6 +120,7 @@ class _SafetyScreenState extends State<SafetyScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: PostingTextField(
+                  controller: controller,
                   onChanged: (value) {},
                   hintText: "내용을 입력하세요",
                   isPosting: true,
@@ -84,19 +139,19 @@ class _SafetyScreenState extends State<SafetyScreen> {
                         ),
                         child: fstImage == null
                             ? Center(
-                            child: SvgPicture.asset(
-                              "assets/icon/camera.svg",
-                              color: Colors.black,
-                            ))
+                                child: SvgPicture.asset(
+                                "assets/icon/camera.svg",
+                                color: Colors.black,
+                              ))
                             : DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            image: DecorationImage(
-                              image: FileImage(File(fstImage!.path)),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  image: DecorationImage(
+                                    image: FileImage(File(fstImage!.path)),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -112,19 +167,19 @@ class _SafetyScreenState extends State<SafetyScreen> {
                         ),
                         child: scdImage == null
                             ? Center(
-                            child: SvgPicture.asset(
-                              "assets/icon/camera.svg",
-                              color: Colors.black,
-                            ))
+                                child: SvgPicture.asset(
+                                "assets/icon/camera.svg",
+                                color: Colors.black,
+                              ))
                             : DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            image: DecorationImage(
-                              image: FileImage(File(scdImage!.path)),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  image: DecorationImage(
+                                    image: FileImage(File(scdImage!.path)),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -152,8 +207,9 @@ class _SafetyScreenState extends State<SafetyScreen> {
               InkWell(
                 onTap: () async {
                   Navigator.pop(context);
-                  final XFile? image = await (isFirst ? fstImagePicker : sndImagePicker)
-                      .pickImage(source: ImageSource.gallery);
+                  final XFile? image =
+                      await (isFirst ? fstImagePicker : sndImagePicker)
+                          .pickImage(source: ImageSource.gallery);
                   if (image != null) {
                     setState(() {
                       if (isFirst) {
@@ -186,8 +242,9 @@ class _SafetyScreenState extends State<SafetyScreen> {
               InkWell(
                 onTap: () async {
                   Navigator.pop(context);
-                  final XFile? image = await (isFirst ? fstImagePicker : sndImagePicker)
-                      .pickImage(source: ImageSource.camera);
+                  final XFile? image =
+                      await (isFirst ? fstImagePicker : sndImagePicker)
+                          .pickImage(source: ImageSource.camera);
                   if (image != null) {
                     setState(() {
                       if (isFirst) {
