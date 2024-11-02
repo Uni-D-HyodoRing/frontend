@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/nav_bar.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [],
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Pretendard",
       ),
-      home: const MyHomePage(),
+      home: const NavBar(),
     );
   }
 }
