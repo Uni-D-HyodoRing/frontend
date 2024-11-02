@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
     return PersistentTabView(
       navBarHeight: 70,
       tabs: _tabs(),
-      navBarBuilder: (navBarConfig) => Style6BottomNavBar(
+      navBarBuilder: (navBarConfig) => Style13BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: const NavBarDecoration(
           borderRadius: BorderRadius.only(
