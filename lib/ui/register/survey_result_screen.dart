@@ -6,12 +6,19 @@ import 'package:frontend/const/text_styles.dart';
 import 'package:frontend/ui/register/select_family_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/provider/register_provider.dart';
+import 'package:dio/dio.dart';
 
 
 class SurveyResultScreen extends StatelessWidget {
   final int totalScore;
+  final List<double> responses;
+  final _dio = Dio();
 
-  const SurveyResultScreen({Key? key, required this.totalScore}) : super(key: key);
+  SurveyResultScreen({
+    Key? key, 
+    required this.totalScore,
+    required this.responses,
+  }) : super(key: key);
 
   String getEvaluation() {
     if (totalScore >= 28) {
@@ -29,17 +36,27 @@ class SurveyResultScreen extends StatelessWidget {
 
   Future<void> _register(BuildContext context) async {
     final registerProvider = context.read<RegisterProvider>();
-    final success = await registerProvider.register();
     
-    if (success) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => SelectFamilyScreen(),
-        ),
+    final adjustedResponses = responses.map((score) => (score + 1).toInt()).toList();
+    
+    try {
+      await _dio.post(
+        'https://a043-123-212-9-154.ngrok-free.app/survey',
+        data: {
+          'user_id': 4,
+          'answers': adjustedResponses,
+        },
       );
-    } else {
+      
+      final success = await registerProvider.register();
+      if (success) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => SelectFamilyScreen()),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('회원가입에 실패했습니다. 다시 시도해주세요.')),
+        SnackBar(content: Text('설문 제출에 실패했습니다. 다시 시도해주세요.')),
       );
     }
   }

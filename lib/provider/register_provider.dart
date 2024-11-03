@@ -8,7 +8,13 @@ class RegisterProvider with ChangeNotifier {
   String? birth;
   String? myRole;
 
-  final Dio _dio = Dio();
+  final Dio _dio = Dio()..interceptors.add(
+    LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+      logPrint: (object) => print('🌐 $object'),
+    ),
+  );
 
   void setLoginId(String value) {
     loginId = value;
