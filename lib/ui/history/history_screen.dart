@@ -1,11 +1,25 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/const/app_color.dart';
+import 'package:frontend/repository/api_source.dart';
 import 'package:frontend/ui/common/components/posting_card.dart';
 import 'package:frontend/ui/history/posting_detail_screen.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+  late Dio dio;
+
+  @override
+  void initState() {
+    super.initState();
+    dio = Dio();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +44,18 @@ class HistoryScreen extends StatelessWidget {
                           builder: (context) => const PostingDetailScreen(),
                         ),
                       ),
-                      child: PostingCard(
-                        name: "냐",
-                        date: "냐하",
-                        content: "냐하하",
+                      child: FutureBuilder(
+                        future: ApiSource(dio).getHelloList(id: 1),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          }
+                          return PostingCard(
+                            name: snapshot.data!.result.name,
+                            date: snapshot.data!.result.date,
+                            content: snapshot.data!.result.content,
+                          );
+                        }
                       ),
                     ),
                   );
