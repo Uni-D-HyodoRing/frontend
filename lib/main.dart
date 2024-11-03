@@ -5,6 +5,7 @@ import 'package:frontend/ui/register/splash_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:frontend/provider/register_provider.dart';
 
 // flutter_local_notifications 플러그인 초기화
 final FlutterLocalNotificationsPlugin _local = FlutterLocalNotificationsPlugin();
@@ -23,6 +24,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => RegisterProvider()),
       ],
       child: const MyApp(),
     ),

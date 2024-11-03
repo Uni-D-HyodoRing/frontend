@@ -43,7 +43,10 @@ class _SurveyScreenState extends State<SurveyScreen> {
       final totalScore = _responses.reduce((a, b) => a + b).toInt();
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => SurveyResultScreen(totalScore: totalScore),
+          builder: (context) => SurveyResultScreen(
+            totalScore: totalScore,
+            responses: _responses,
+          ),
         ),
       );
     }

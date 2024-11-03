@@ -5,6 +5,8 @@ import 'package:frontend/const/text_styles.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:frontend/ui/register/select_family_screen.dart';
 import 'package:frontend/ui/register/select_profile_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend/provider/register_provider.dart';
 
 class InfoInputScreen extends StatefulWidget {
   const InfoInputScreen({super.key});
@@ -30,6 +32,19 @@ class _InfoInputScreenState extends State<InfoInputScreen> {
     _monthController.dispose();
     _dayController.dispose();
     super.dispose();
+  }
+
+  void _saveUserInfo() {
+    final registerProvider = context.read<RegisterProvider>();
+    registerProvider.setLoginId(_idController.text);
+    registerProvider.setLoginPw(_passwordController.text);
+    registerProvider.setName(_nameController.text);
+    
+    // 생년월일 포맷팅
+    final year = _yearController.text.padLeft(4, '0');
+    final month = _monthController.text.padLeft(2, '0');
+    final day = _dayController.text.padLeft(2, '0');
+    registerProvider.setBirth('$year-$month-$day');
   }
 
   @override
@@ -180,6 +195,7 @@ class _InfoInputScreenState extends State<InfoInputScreen> {
             Expanded(child: SizedBox(),),
             ElevatedButton(
             onPressed: () {
+              _saveUserInfo();
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => SelectProfileScreen(),
