@@ -22,7 +22,7 @@ class PostingDetailScreen extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             children: [
-              PostingCard(
+              const PostingCard(
                 name: "엄마",
                 date: "2024.11.02",
                 content: "따뜻했던 토요일의 기록",
@@ -52,12 +52,12 @@ class PostingDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              PostingComment(
+              const PostingComment(
                 name: "김만두",
                 date: "2024.11.02",
-                comment: "나도 데러가 음마",
+                comment: "나도 데려가 음마",
               ),
-              PostingComment(
+              const PostingComment(
                 name: "엄마",
                 date: "2024.11.02",
                 comment: "그려",
