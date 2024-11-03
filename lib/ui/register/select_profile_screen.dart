@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/const/app_color.dart';
 import 'package:frontend/const/text_styles.dart';
 import 'package:frontend/ui/register/survey_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend/provider/register_provider.dart';
 
 
 class SelectProfileScreen extends StatefulWidget {
@@ -18,6 +20,12 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
     setState(() {
       _selectedIndex = index;
     });
+    
+    final role = index == 0 ? 'SON' : 
+                 index == 1 ? 'DAUGHTER' :
+                 index == 2 ? 'MOTHER' : 'FATHER';
+                 
+    context.read<RegisterProvider>().setMyRole(role);
   }
 
   @override

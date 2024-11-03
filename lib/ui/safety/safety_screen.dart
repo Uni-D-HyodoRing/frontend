@@ -7,6 +7,7 @@ import 'package:frontend/ui/common/components/posting_text_field.dart';
 import 'package:frontend/ui/common/components/posting_title.dart';
 import 'package:frontend/ui/common/style/box_decoration.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:frontend/const/text_styles.dart';
 
 class SafetyScreen extends StatefulWidget {
   const SafetyScreen({super.key});
@@ -45,13 +46,15 @@ class _SafetyScreenState extends State<SafetyScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 60.0, 8.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(8.0, 100.0, 8.0, 0.0),
         child: Container(
           padding: const EdgeInsets.all(16.0),
           decoration: postingBoxDecoration,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Text("안부 보내기", style: TextStyles.black16bold),
+              const SizedBox(height: 16.0),
               PostingTitle(
                 name: "김만두",
                 date: "2024.11.02",

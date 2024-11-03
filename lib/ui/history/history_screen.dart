@@ -79,7 +79,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 60.0, 20.0, 20.0),
+        padding: EdgeInsets.fromLTRB(20.0, 120.0, 20.0, 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
