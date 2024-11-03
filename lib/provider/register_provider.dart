@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 class RegisterProvider with ChangeNotifier {
+  int? memberId;
   String? loginId;
   String? loginPw;
   String? name;
@@ -53,8 +54,8 @@ class RegisterProvider with ChangeNotifier {
           'myRole': myRole,
         },
       );
-      
       if (response.statusCode == 200) {
+        memberId = response.data['result']['user_id'];
         return true;
       }
       return false;
